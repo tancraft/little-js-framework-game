@@ -66,14 +66,6 @@ export default class InputHandler {
         
         let posX, posY;
         
-        // if (event.type === 'click') {
-        //     const rect = this.canvas.getBoundingClientRect();
-        //     posX = (event.clientX - rect.left);
-        //     posY = (event.clientY - rect.top);
-        // } else if (event.type === 'touchstart') {
-        //     posX = event.touches[0].clientX;
-        //     posY = event.touches[0].clientY;
-        // }
         if (event.type === 'click') {
             const rect = this.canvas.getBoundingClientRect();
             posX = event.pageX - rect.left;
