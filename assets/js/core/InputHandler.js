@@ -4,7 +4,6 @@ export default class InputHandler {
     constructor(game, player, button) {
         this.game = game;
         this.button = game.UIelements[1].button;
-        // this.circle = game.UIelements[1].circle;
         this.canvas = game.canvas;
         this.gamepadConnected = false;
         this.gamepadIndex = undefined;
@@ -65,11 +64,10 @@ export default class InputHandler {
         event.preventDefault();
         
         let posX, posY;
-        
+
         if (event.type === 'click') {
-            const rect = this.canvas.getBoundingClientRect();
-            posX = event.pageX - rect.left;
-            posY = event.pageY - rect.top;
+            posX = event.pageX - this.canvas.offsetLeft;
+            posY = event.pageY - this.canvas.offsetTop;
         } else if (event.type === 'touchstart') {
             posX = event.touches[0].pageX;
             posY = event.touches[0].pageY;

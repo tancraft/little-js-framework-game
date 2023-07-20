@@ -6,7 +6,7 @@ export default class Ball extends GameObject {
         super(game);
         this.gameWidth = this.game.gameWidth;
         this.gameHeight = this.game.gameHeight;
-        this.size = 16;
+        this.size = 8;
         this.reset();
     }
 

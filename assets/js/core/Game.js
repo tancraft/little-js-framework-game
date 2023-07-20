@@ -34,7 +34,7 @@ export default class Game {
         this.levels = [Level1, Level2];
 
         this.currentLevel = 0;
-        this.lives = 3;
+        this.lives = 1;
     }
     start(){
         if (
