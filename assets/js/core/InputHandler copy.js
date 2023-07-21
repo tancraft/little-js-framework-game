@@ -136,7 +136,7 @@ export default class InputHandler {
         if (this.gamepadConnected) {
             const gamepads = navigator.getGamepads();
             const gamepad = gamepads[this.gamepadIndex];
-            
+
             if (gamepad) {
 
                 const axisX = gamepad.axes[0];
@@ -152,30 +152,24 @@ export default class InputHandler {
                 if (gamepad.buttons[0].pressed) {
                     this.game.player.shot();
                 }
-                if (gamepad.buttons[9].pressed) {
-                    this.game.start();
+
+                if (this.prevGamepadState) {
+                    const prevButtonPauseState = this.prevGamepadState.buttons[3].pressed;
+                    const currButtonPauseState = gamepad.buttons[3].pressed;
+
+                    if (!prevButtonPauseState && currButtonPauseState) {
+                        this.game.togglePause();
+                    }
                 }
-                // Mettez à jour prevGamepadState avec l'état actuel du gamepad
-                this.prevGamepadState = this.prevGamepadState || gamepad.buttons.map((button) => button.pressed);
-
-                // Vérifiez si le bouton a été enfoncé pendant cette frame uniquement
-                const prevButtonPauseState = this.prevGamepadState[3];
-                const currButtonPauseState = gamepad.buttons[3].pressed;
-
-                if (!prevButtonPauseState && currButtonPauseState) {
-                    this.game.togglePause();
-                }
-
-                // Vérifiez si le bouton a été enfoncé pendant cette frame uniquement
-                const prevButtonFullscreenState = this.prevGamepadState[8];
-                const currButtonFullscreenState = gamepad.buttons[8].pressed;
-
-                if (!prevButtonFullscreenState && currButtonFullscreenState) {
+                if (gamepad.buttons[8].pressed) {
                     this.game.toggleFullscreen();
                 }
 
-                // Mettez à jour prevGamepadState avec l'état actuel du gamepad
-                this.prevGamepadState = gamepad.buttons.map((button) => button.pressed);
+                if (gamepad.buttons[9].pressed) {
+                    this.game.start();
+                }
+
+                this.prevGamepadState = gamepad;
             }
         }
     }
