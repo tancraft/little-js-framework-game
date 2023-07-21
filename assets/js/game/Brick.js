@@ -5,8 +5,7 @@ import { collisionDetection } from "../core/collisionDetection.js";
 export default class Brick extends GameObject {
     constructor(game,posX,posY){
         super(game);
-        this.image = new Image();
-        this.image.src = './assets/images/brick.png';
+        this.image = document.querySelector('#brick');
         this.posX = posX;
         this.posY = posY;
         this.width = 80;
