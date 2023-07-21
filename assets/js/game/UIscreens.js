@@ -44,7 +44,7 @@ export class PausedScreen extends UI {
 export class MenuScreen extends UI {
     constructor(game){
         super(game);
-        this.button = new Button(this.game,this.gameWidth * 0.5, this.gameHeight * 0.5,200, 40);
+        this.button = new Button(this.game, this.gameWidth * 0.5, this.gameHeight * 0.5, 200, 40);
     }
     draw(context){
         context.rect(0, 0, this.gameWidth, this.gameHeight);
@@ -53,7 +53,7 @@ export class MenuScreen extends UI {
         context.font = '40px Arial';
         context.fillStyle = 'white';
         context.textAlign = 'center';
-        context.fillText('Casse Briques', this.gameWidth * 0.5, this.gameHeight * 0.4);
+        context.fillText('Casse Briques', (this.gameWidth * 0.5), (this.gameHeight * 0.4));
         this.button.draw(context);
     }
 }

@@ -16,8 +16,9 @@ const GAMESTATE = {
 export default class Game {
     constructor(canvas, bricksPerRow){
         this.canvas = canvas;
-        this.gameWidth = this.canvas.width;
-        this.gameHeight = this.canvas.height;
+        this.gameWidth = 800;
+        this.gameHeight = 600;
+        this.aspectRatio = this.canvas.clientWidth / this.gameWidth;
         this.gameState = GAMESTATE.MENU;
         this.UIelements = [
             new PausedScreen(this), 
@@ -28,7 +29,6 @@ export default class Game {
         this.player = new Player(this);
         this.ball = new Ball(this);
         this.inputHandler = new InputHandler(this,this.player);
-        // new InputHandler(this,this.player);
         this.gameObjects = [];
         this.bricks = [];
         this.levels = [Level1, Level2];
