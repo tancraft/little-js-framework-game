@@ -24,8 +24,8 @@ export class MenuScreen extends UI {
 export class mainUI extends UI {
     constructor(game){
         super(game);
-        this.left = new Button(this.game, 80 * 0.5, this.gameHeight - 80 * 0.5, 60, 60, 'rgba(255,0,100, 0.2)','left', 'left');
-        this.right = new Button(this.game, 240 * 0.5, this.gameHeight - 80 * 0.5, 60, 60, 'rgba(255,0,100, 0.2)','right', 'right');
+        this.left = new Button(this.game, 120 * 0.5, this.gameHeight - 80 * 0.5, 100, 100, 'rgba(255,0,100, 0.2)','left', 'left');
+        this.right = new Button(this.game, this.gameWidth - 120 * 0.5, this.gameHeight - 80 * 0.5, 100, 100, 'rgba(255,0,100, 0.2)','right', 'right');
         this.fullscreen = new Button(this.game, 80 * 0.5, 50 * 0.6, 200, 40, 'pink','fullscreen');
     }
     draw(context){

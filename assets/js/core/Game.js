@@ -34,7 +34,7 @@ export default class Game {
         this.levels = [Level1, Level2];
 
         this.currentLevel = 0;
-        this.lives = 1;
+        this.lives = 3;
         this.score = 0;
     }
 
@@ -84,50 +84,25 @@ export default class Game {
         }
     }
 
-    toggleFullscreen() {
-        const doc = window.document;
-        const docEl = doc.documentElement;
-        const isFullscreen = doc.fullscreenElement || doc.mozFullScreenElement || doc.webkitFullscreenElement || doc.msFullscreenElement;
+// ... Autres parties du code ...
 
-        if (!isFullscreen) {
-            const requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-            if (requestFullScreen) {
-                requestFullScreen.call(docEl);
-            }
-        } else {
-            const cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-            if (cancelFullScreen) {
-                cancelFullScreen.call(doc);
-            }
+toggleFullscreen() {
+    const doc = window.document;
+    const docEl = doc.documentElement;
+    const isFullscreen = doc.fullscreenElement || doc.mozFullScreenElement || doc.webkitFullscreenElement || doc.msFullscreenElement;
+
+    if (!isFullscreen) {
+        const requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+        if (requestFullScreen) {
+            requestFullScreen.call(docEl);
         }
-
-        if (this.isMobileDevice() && window.screen.orientation) {
-            if (isFullscreen && this.isPortraitMode()) {
-                if (docEl.requestFullscreen) {
-                    docEl.requestFullscreen().catch(() => {
-                        // Do nothing if fullscreen request is denied (common on mobile devices)
-                    });
-                } else if (docEl.mozRequestFullScreen) {
-                    docEl.mozRequestFullScreen().catch(() => {});
-                } else if (docEl.webkitRequestFullScreen) {
-                    docEl.webkitRequestFullScreen().catch(() => {});
-                } else if (docEl.msRequestFullscreen) {
-                    docEl.msRequestFullscreen().catch(() => {});
-                }
-            } else {
-                if (doc.exitFullscreen) {
-                    doc.exitFullscreen();
-                } else if (doc.mozCancelFullScreen) {
-                    doc.mozCancelFullScreen();
-                } else if (doc.webkitExitFullscreen) {
-                    doc.webkitExitFullscreen();
-                } else if (doc.msExitFullscreen) {
-                    doc.msExitFullscreen();
-                }
-            }
+    } else {
+        const cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+        if (cancelFullScreen) {
+            cancelFullScreen.call(doc);
         }
     }
-
+}
     isMobileDevice() {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
