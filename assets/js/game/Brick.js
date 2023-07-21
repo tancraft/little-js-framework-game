@@ -10,11 +10,13 @@ export default class Brick extends GameObject {
         this.posY = posY;
         this.width = 80;
         this.height = 27;
+        this.score = 10;
         this.markedForDelete = false
     }
     update(deltaTime){
         if(collisionDetection(this.game.ball, this)){
             this.game.ball.speedY = -this.game.ball.speedY;
+            this.game.score += this.score;
             this.markedForDelete = true
         }
     }

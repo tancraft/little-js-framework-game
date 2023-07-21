@@ -42,10 +42,20 @@ export default class InputHandler {
         this.canvas.addEventListener('click', (event) => {
             this.handleButtonClick(event);
         });
+        this.canvas.addEventListener('mouseup', (event) => {
+            this.handleButtonClick(event);
+            this.game.UIelements[3].left.handleMouseUp();
+            this.game.UIelements[3].right.handleMouseUp();
+          });
 
         this.canvas.addEventListener('touchstart', (event) => {
             this.handleButtonClick(event);
         });
+        this.canvas.addEventListener('touchend', (event) => {
+            this.handleButtonClick(event);
+            this.game.UIelements[3].left.handleMouseUp();
+            this.game.UIelements[3].right.handleMouseUp();
+          });
 
         addEventListener('gamepadconnected', (e) => {
             this.gamepadConnected = true;
@@ -62,21 +72,32 @@ export default class InputHandler {
 
     handleButtonClick(event) {
         event.preventDefault();
-        
         let posX, posY;
-
+    
         if (event.type === 'click') {
-            posX = event.pageX - this.canvas.offsetLeft;
-            posY = event.pageY - this.canvas.offsetTop;
+          posX = event.pageX - this.canvas.offsetLeft;
+          posY = event.pageY - this.canvas.offsetTop;
         } else if (event.type === 'touchstart') {
-            posX = event.touches[0].pageX;
-            posY = event.touches[0].pageY;
+          posX = event.touches[0].pageX;
+          posY = event.touches[0].pageY;
         }
 
-        if (this.button.click(posX, posY)) {
+        if (this.game.UIelements[1].button.click(posX, posY)) {
             this.game.start();
         }
-    }
+
+        if (this.game.UIelements[3].left.click(posX, posY)) {
+            this.game.UIelements[3].left.handleMouseDown();
+            this.game.player.moveLeft();
+          } else if (this.game.UIelements[3].right.click(posX, posY)) {
+            this.game.UIelements[3].right.handleMouseDown();
+            this.game.player.moveRight();
+          } else {
+            this.game.UIelements[3].right.handleMouseUp();
+            this.game.player.stop();
+          }
+        
+}
 
     update() {
         

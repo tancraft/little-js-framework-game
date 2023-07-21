@@ -2,7 +2,7 @@ import Ball from '../game/Ball.js';
 import InputHandler from './InputHandler.js';
 import Player from '../game/Player.js';
 import {buildLevel, Level1, Level2} from '../game/levels.js';
-import {PausedScreen, MenuScreen, GameScreen } from '../game/UIscreens.js';
+import {PausedScreen, MenuScreen, GameOverScreen, mainUI } from '../game/UIscreens.js';
 
 const GAMESTATE = {
     PAUSED: 0,
@@ -23,7 +23,8 @@ export default class Game {
         this.UIelements = [
             new PausedScreen(this), 
             new MenuScreen(this), 
-            new GameScreen(this)
+            new GameOverScreen(this),
+            new mainUI(this)
         ];
 
         this.player = new Player(this);
@@ -35,6 +36,7 @@ export default class Game {
 
         this.currentLevel = 0;
         this.lives = 1;
+        this.score = 0;
     }
     start(){
         if (
@@ -73,6 +75,7 @@ export default class Game {
         if(this.gameState === GAMESTATE.PAUSED) this.UIelements[0].draw(context);
         if(this.gameState === GAMESTATE.MENU) this.UIelements[1].draw(context);
         if(this.gameState === GAMESTATE.GAMEOVER) this.UIelements[2].draw(context);
+        if(this.gameState === GAMESTATE.RUNNING) this.UIelements[3].draw(context);
     }
     togglePause(){
         if(this.gameState == GAMESTATE.PAUSED){
