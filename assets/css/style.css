@@ -1,4 +1,6 @@
-*{
+*,
+::before,
+::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -11,13 +13,6 @@
   flex-wrap: wrap;
 }
 /*-------------------------------------reset*/
-*,
-::before,
-::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 figure {
   margin-block-start: 0;
   margin-block-end: 0;
